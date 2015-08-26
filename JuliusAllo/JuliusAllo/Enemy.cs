@@ -14,7 +14,7 @@ namespace JuliusAllo
             image = Art.BaseEnemy;
             Position = new Vector2((float)Helper.Random.Next(0, (int)GameRoot.ScreenSize.X), (float)Helper.Random.Next(0, (int)GameRoot.ScreenSize.Y));
             ImageScale = 0.1f;
-            Speed = new Vector2(3f, 3f);
+            Velocity = new Vector2(3f, 3f);
         }
 
         public override void Update()
@@ -45,7 +45,7 @@ namespace JuliusAllo
                 _direction.Y = -1;
             }
 
-            Position += _direction * Speed;
+            Position += _direction * Velocity;
         }
     }
 }

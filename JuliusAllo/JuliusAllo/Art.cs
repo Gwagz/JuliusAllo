@@ -20,7 +20,7 @@ namespace JuliusAllo
         {
             Player = content.Load<Texture2D>("Art/Player");
             Pointer = content.Load<Texture2D>("Art/Pointer");
-            BaseEnemy = content.Load<Texture2D>("Cat");
+            BaseEnemy = content.Load<Texture2D>("Art/Cat");
         }
     }
 }

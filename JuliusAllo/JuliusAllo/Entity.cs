@@ -15,7 +15,7 @@ namespace JuliusAllo
         protected Color color = Color.White;
 
         public Vector2 Position;
-        public Vector2 Speed = Vector2.One;
+        public Vector2 Velocity = Vector2.One;
         public float Orientation;
         public float Radius = 20;   // used for circular collision detection
         public bool IsExpired;      // true if the entity was destroyed and should be deleted.
