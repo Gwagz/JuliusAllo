@@ -33,7 +33,17 @@ namespace JuliusAllo
             // TODO: Add your initialization logic here
 
             base.Initialize();
+
+            Enemy enemy1 = new Enemy();
+            Enemy enemy2 = new Enemy();
+            Enemy enemy3 = new Enemy();
+            Enemy enemy4 = new Enemy();
+
             EntityManager.Add(PlayerShip.Instance);
+            EntityManager.Add(enemy1);
+            EntityManager.Add(enemy2);
+            EntityManager.Add(enemy3);
+            EntityManager.Add(enemy4);
         }
 
         /// <summary>
@@ -69,10 +79,9 @@ namespace JuliusAllo
                 Exit();
 
             // TODO: Add your update logic here
+            EntityManager.Update();
 
             base.Update(gameTime);
-
-            EntityManager.Update();
         }
 
         /// <summary>

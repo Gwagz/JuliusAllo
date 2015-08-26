@@ -5,6 +5,9 @@ using System.Text;
 
 namespace JuliusAllo
 {
+    /// <summary>
+    /// This is the ship that the Player controls.
+    /// </summary>
     class PlayerShip : Entity
     {
         private static PlayerShip instance;

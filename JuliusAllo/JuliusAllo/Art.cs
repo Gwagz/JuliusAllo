@@ -12,10 +12,12 @@ namespace JuliusAllo
     static class Art
     {
         public static Texture2D Player { get; private set; }
+        public static Texture2D BaseEnemy { get; private set; }
 
         public static void Load(ContentManager content)
         {
             Player = content.Load<Texture2D>("Player");
+            BaseEnemy = content.Load<Texture2D>("Cat");
         }
     }
 }
