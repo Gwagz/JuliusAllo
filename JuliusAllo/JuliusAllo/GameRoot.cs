@@ -34,16 +34,13 @@ namespace JuliusAllo
 
             base.Initialize();
 
-            Enemy enemy1 = new Enemy();
-            Enemy enemy2 = new Enemy();
-            Enemy enemy3 = new Enemy();
-            Enemy enemy4 = new Enemy();
-
             EntityManager.Add(PlayerShip.Instance);
-            EntityManager.Add(enemy1);
-            EntityManager.Add(enemy2);
-            EntityManager.Add(enemy3);
-            EntityManager.Add(enemy4);
+
+            int nbEnemies = 15;
+            for (int i = 0; i < nbEnemies; ++i)
+            {
+                EntityManager.Add(new Enemy());
+            }
         }
 
         /// <summary>
@@ -81,6 +78,7 @@ namespace JuliusAllo
                 Exit();
 
             // TODO: Add your update logic here
+
             EntityManager.Update();
 
             base.Update(gameTime);

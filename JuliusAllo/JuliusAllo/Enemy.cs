@@ -8,7 +8,15 @@ namespace JuliusAllo
 {
     class Enemy : Entity
     {
-        Vector2 _direction = Vector2.One;
+        private enum AITypes 
+        { 
+            None,     // Basic collisions and direction
+            Basic     // Fallows PlayerShip
+        };
+        private AITypes AI = AITypes.Basic;
+
+        private Vector2 _direction = Vector2.One;
+
         public Enemy()
         {
             image = Art.BaseEnemy;
@@ -19,33 +27,85 @@ namespace JuliusAllo
 
         public override void Update()
         {
-            Move();
+            //Move();
+
+            Position.X += _direction.X * Velocity.X;
+
+            CheckWindowCollisions();
+            CheckEntityCollisions(true);
+
+            Position.Y += _direction.Y * Velocity.Y;
+            CheckWindowCollisions();
+            CheckEntityCollisions(false);
         }
 
-        void Move()
+        // Verify collisions with game window
+        private void CheckWindowCollisions()
         {
-            // Verify collision with game window
-            if (Position.X - Size.X / 2f <= 0)
+            if (BoundingBox.Left <= 0)
             {
                 _direction.X = 1f;
             }
 
-            if (Position.X + Size.X / 2f >= GameRoot.ScreenSize.X)
+            if (BoundingBox.Right >= GameRoot.ScreenSize.X)
             {
                 _direction.X = -1f;
             }
 
-            if (Position.Y - Size.Y / 2f <= 0)
+            if (BoundingBox.Top <= 0)
             {
                 _direction.Y = 1;
             }
 
-            if (Position.Y + Size.Y / 2f >= GameRoot.ScreenSize.Y)
+            if (BoundingBox.Bottom >= GameRoot.ScreenSize.Y)
             {
                 _direction.Y = -1;
             }
+        }
 
-            Position += _direction * Velocity;
+        private void CheckEntityCollisions(bool xAxis)
+        {
+            foreach (Entity e in EntityManager.EntitiesList)
+            {
+                if (e != this && BoundingBox.Intersects(e.BoundingBox))
+                {
+                    if (xAxis)
+                    {
+                        if (BoundingBox.Right >= e.BoundingBox.Left && _direction.X == 1)
+                        {
+                            _direction.X = -1;
+                            //Position.X += _direction.X * Velocity.X;
+                            break;
+                        }
+                        if (BoundingBox.Left <= e.BoundingBox.Right && _direction.X == -1)
+                        {
+                            _direction.X = 1;
+                            //Position.X += _direction.X * Velocity.X;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (BoundingBox.Bottom >= e.BoundingBox.Top && _direction.Y == 1)
+                        {
+                            _direction.Y = -1;
+                            //Position.Y += _direction.Y * Velocity.Y;
+                            break;
+                        }
+                        if (BoundingBox.Top <= e.BoundingBox.Bottom && _direction.Y == -1)
+                        {
+                            _direction.Y = 1;
+                            //Position.Y += _direction.Y * Velocity.Y;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        void Move()
+        {
+            
         }
     }
 }

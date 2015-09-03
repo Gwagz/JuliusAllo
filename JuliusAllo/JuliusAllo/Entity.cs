@@ -38,6 +38,15 @@ namespace JuliusAllo
             }
         }
 
+        public Rectangle BoundingBox
+        {
+            get
+            {
+                // Rectangle(top left corner of box, size of texture). Position is in the center so we need to shift it back.
+                return new Rectangle((int)Position.X - (int)(Size.X / 2f), (int)Position.Y - (int)(Size.Y / 2f), (int)Size.X, (int)Size.Y);
+            }
+        }
+
         public abstract void Update();
 
         public virtual void Draw(SpriteBatch spriteBatch)
